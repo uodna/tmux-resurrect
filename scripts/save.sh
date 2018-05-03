@@ -232,6 +232,9 @@ dump_panes() {
 			if is_session_grouped "$session_name"; then
 				continue
 			fi
+			if [ "$window_number" -gt 1 ]; then
+				continue
+			fi
 			full_command="$(pane_full_command $pane_pid)"
 			echo "${line_type}${d}${session_name}${d}${window_number}${d}${window_name}${d}${window_active}${d}${window_flags}${d}${pane_index}${d}${dir}${d}${pane_active}${d}${pane_command}${d}:${full_command}"
 		done
@@ -242,6 +245,9 @@ dump_windows() {
 		while IFS=$d read line_type session_name window_index window_active window_flags window_layout; do
 			# not saving windows from grouped sessions
 			if is_session_grouped "$session_name"; then
+				continue
+			fi
+			if [ "$window_index" -gt 1 ]; then
 				continue
 			fi
 			echo "${line_type}${d}${session_name}${d}${window_index}${d}${window_active}${d}${window_flags}${d}${window_layout}"
