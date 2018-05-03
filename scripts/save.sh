@@ -235,6 +235,9 @@ dump_panes() {
 			if [ "$window_number" -gt 1 ]; then
 				continue
 			fi
+			if [ "$pane_index" -gt 1 ]; then
+				continue
+			fi
 			full_command="$(pane_full_command $pane_pid)"
 			echo "${line_type}${d}${session_name}${d}${window_number}${d}${window_name}${d}${window_active}${d}${window_flags}${d}${pane_index}${d}${dir}${d}${pane_active}${d}${pane_command}${d}:${full_command}"
 		done
